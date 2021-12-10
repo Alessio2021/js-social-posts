@@ -32,7 +32,8 @@ const users = [
         likes: 98
     },
 ]
-const cardPrint = card(users)
+
+const cardPrint = card(users);
 
 
 const button = document.querySelectorAll('.js-like-button');
@@ -55,45 +56,102 @@ for (let i = 0; i < button.length; i++) {
 
 
 // FUNCTION
+
+const getInitials = (name) => {
+    let initials = name.split(' ');
+
+    if (initials.length > 1) {
+        initials = initials.shift().charAt(0) + initials.pop().charAt(0);
+    } else {
+        initials = name.substring(0, 2);
+    }
+
+    return initials.toUpperCase();
+}
+
 function card(array) {
     for (let i = 0; i < array.length; i++) {
         const newPost = array[i];
-    
-        const element = 
+        let initial = getInitials(newPost.guest);
+
+        if (newPost.imageUser == '') {
+            const element =
             `
             <div class="post">
-            <div class="post__header">
-                <div class="post-meta">                    
-                    <div class="post-meta__icon">
-                        <img class="profile-pic" src="https://unsplash.it/300/300?${newPost.imageUser}" alt="${newPost.guest}">                    
+                <div class="post__header">
+                    <div class="post-meta">                    
+                        <div class="post-meta__icon">
+                            <div class="profile-pic-default">
+                                <span>${initial}</span>
+                            </div>                   
+                        </div>
+                        <div class="post-meta__data">
+                            <div class="post-meta__author">${newPost.guest}</div>
+                            <div class="post-meta__time">${newPost.date}</div>
+                        </div>                    
                     </div>
-                    <div class="post-meta__data">
-                        <div class="post-meta__author">${newPost.guest}</div>
-                        <div class="post-meta__time">${newPost.date}</div>
-                    </div>                    
                 </div>
+                <div class="post__text">${newPost.text}</div>
+                <div class="post__image">
+                    <img src="https://unsplash.it/600/300?${newPost.image}" alt="">
+                </div>
+                <div class="post__footer">
+                    <div class="likes js-likes">
+                        <div class="likes__cta">
+                            <a class="like-button  js-like-button" data-postid="1">
+                                <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                                <span class="like-button__label">Mi Piace</span>
+                            </a>
+                        </div>
+                        <div class="likes__counter">
+                            Piace a <b id="like-counter-1" class="js-likes-counter">${newPost.likes}</b> persone
+                        </div>
+                    </div> 
+                </div>            
             </div>
-            <div class="post__text">${newPost.text}</div>
-            <div class="post__image">
-                <img src="https://unsplash.it/600/300?${newPost.image}" alt="">
+            `;
+
+            container.innerHTML += element;
+
+        } else {
+            const element =
+            `
+            <div class="post">
+                <div class="post__header">
+                    <div class="post-meta">                    
+                        <div class="post-meta__icon">
+                            <img class="profile-pic" src="https://unsplash.it/300/300?${newPost.imageUser}" alt="${newPost.guest}">                    
+                        </div>
+                        <div class="post-meta__data">
+                            <div class="post-meta__author">${newPost.guest}</div>
+                            <div class="post-meta__time">${newPost.date}</div>
+                        </div>                    
+                    </div>
+                </div>
+                <div class="post__text">${newPost.text}</div>
+                <div class="post__image">
+                    <img src="https://unsplash.it/600/300?${newPost.image}" alt="">
+                </div>
+                <div class="post__footer">
+                    <div class="likes js-likes">
+                        <div class="likes__cta">
+                            <a class="like-button  js-like-button" data-postid="1">
+                                <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                                <span class="like-button__label">Mi Piace</span>
+                            </a>
+                        </div>
+                        <div class="likes__counter">
+                            Piace a <b id="like-counter-1" class="js-likes-counter">${newPost.likes}</b> persone
+                        </div>
+                    </div> 
+                </div>            
             </div>
-            <div class="post__footer">
-                <div class="likes js-likes">
-                    <div class="likes__cta">
-                        <a class="like-button  js-like-button" data-postid="1">
-                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                            <span class="like-button__label">Mi Piace</span>
-                        </a>
-                    </div>
-                    <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter">${newPost.likes}</b> persone
-                    </div>
-                </div> 
-            </div>            
-        </div>
-        `;
-    
+            `;
+
         container.innerHTML += element;
+   
+        }
     }
     
 }
+
