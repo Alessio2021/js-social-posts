@@ -57,7 +57,7 @@ for (let i = 0; i < users.length; i++) {
         <div class="post__footer">
             <div class="likes js-likes">
                 <div class="likes__cta">
-                    <a class="like-button  js-like-button" href="#" data-postid="1">
+                    <a class="like-button  js-like-button" data-postid="1">
                         <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                         <span class="like-button__label">Mi Piace</span>
                     </a>
@@ -71,4 +71,20 @@ for (let i = 0; i < users.length; i++) {
     `;
 
     container.innerHTML += element;
+}
+
+const button = document.querySelectorAll('.js-like-button');
+let like = document.getElementById('like-counter-1');
+
+for (let i = 0; i < button.length; i++) {
+    button[i].addEventListener('click', function (){
+        // console.log(button[i]);
+        button[i].classList.toggle('like-button--liked');
+
+        if (button[i].classList.contains('like-button--liked') == true) {
+            like.innerHTML = users[i].likes += 1;
+        } else {
+            like.innerHTML = users[i].likes -= 1;
+        }
+    });
 }
