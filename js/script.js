@@ -1,7 +1,7 @@
 const users = [
     {
         guest: 'Phil Mangione',
-        imageUser: 'image=15',
+        imageUser: '',
         date: '4 mesi fa',
         text: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut.Distinctio minima iusto.Ad ad maiores et sint voluptate recusandae architecto.Et nihil ullam aut alias.',
         image: 'image=171',
