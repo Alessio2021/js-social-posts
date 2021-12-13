@@ -33,17 +33,17 @@ const users = [
     },
 ]
 
-const cardPrint = card(users);
-
+const container = document.getElementById('container');
+const cardPrint = card(users, container);
 
 const button = document.querySelectorAll('.js-like-button');
 let like = document.querySelectorAll('.js-likes-counter');
+
 for (let i = 0; i < button.length; i++) {
 
-    button[i].addEventListener('click', function (){
-        // console.log(button[i]);
+    button[i].addEventListener('click', function () {
         button[i].classList.toggle('like-button--liked');
-        
+
         if (button[i].classList.contains('like-button--liked') == true) {
             like[i].innerHTML = users[i].likes += 1;
         } else {
@@ -55,9 +55,10 @@ for (let i = 0; i < button.length; i++) {
 
 
 
-// FUNCTION
 
-const getInitials = (name) => {
+
+// FUNCTION
+function getInitials(name) {
     let initials = name.split(' ');
 
     if (initials.length > 1) {
@@ -69,14 +70,14 @@ const getInitials = (name) => {
     return initials.toUpperCase();
 }
 
-function card(array) {
+function card(array, containerPost) {
     for (let i = 0; i < array.length; i++) {
         const newPost = array[i];
         let initial = getInitials(newPost.guest);
 
         if (newPost.imageUser == '') {
             const element =
-            `
+                `
             <div class="post">
                 <div class="post__header">
                     <div class="post-meta">                    
@@ -111,11 +112,11 @@ function card(array) {
             </div>
             `;
 
-            container.innerHTML += element;
+            containerPost.innerHTML += element;
 
         } else {
             const element =
-            `
+                `
             <div class="post">
                 <div class="post__header">
                     <div class="post-meta">                    
@@ -148,10 +149,9 @@ function card(array) {
             </div>
             `;
 
-        container.innerHTML += element;
-   
+            containerPost.innerHTML += element;
+
         }
     }
-    
-}
 
+}
